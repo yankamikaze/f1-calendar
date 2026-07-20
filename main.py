@@ -2,6 +2,10 @@ from openf1 import listar_corridas
 
 corridas = listar_corridas(2026)
 
-print(type(corridas))
-print(len(corridas))
-print(corridas[0])
+#print(type(corridas))
+#print(len(corridas))
+#print(corridas[0])
+
+for corrida in corridas:
+    print(corrida["meeting_name"])
+
