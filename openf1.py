@@ -6,11 +6,10 @@ def listar_pilotos():
     url = "https://api.openf1.org/v1/drivers"
 
     resposta = requests.get(url)
-    
+    resposta.raise_for_status()
     
     return resposta.json()
     
-import requests
 
 
 def listar_corridas(ano):
@@ -19,7 +18,7 @@ def listar_corridas(ano):
 
 
     resposta = requests.get(url)
-
+    resposta.raise_for_status()
     dados = resposta.json()
     
     #return resposta.json()
@@ -48,3 +47,13 @@ def listar_corridas(ano):
                                
         )
     return corridas_tratadas
+
+
+def listar_sessoes(meeting_key):
+
+        url = f"https://api.openf1.org/v1/sessions?meeting_key={meeting_key}"
+
+        resposta = requests.get(url)
+        resposta.raise_for_status()
+
+        return resposta.json()
