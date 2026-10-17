@@ -1,5 +1,6 @@
 import requests
 
+#TRAZ OS PILOTOS DA API OPENF1 - INICIO
 
 def listar_pilotos():
 
@@ -10,7 +11,9 @@ def listar_pilotos():
     
     return resposta.json()
     
+#TRAZ OS PILOTOS DA API OPENF1 - FIM
 
+#TRAZ A LISTA DE CORRIDAS DA API OPENF1 - INICIO
 
 def listar_corridas(ano):
 
@@ -49,6 +52,12 @@ def listar_corridas(ano):
     return corridas_tratadas
 
 
+#TRAZ A LISTA DE CORRIDAS DA API OPENF1 - FIM
+
+
+
+#TRAZ A LISTA DE SESSOES DE UM EVENTO DA API OPENF1 - INICIO
+
 def listar_sessoes(meeting_key):
 
         url = f"https://api.openf1.org/v1/sessions?meeting_key={meeting_key}"
@@ -56,4 +65,28 @@ def listar_sessoes(meeting_key):
         resposta = requests.get(url)
         resposta.raise_for_status()
 
-        return resposta.json()
+        dados = resposta.json()
+
+
+        sessoes_tratadas = []
+
+        for sessao in dados:
+
+            sessoes_tratadas.append(
+                {"session_key": sessao["session_key"],
+                 "meeting_key": sessao["meeting_key"],
+                 "session_name": sessao["session_name"],
+                 "session_type": sessao["session_type"],
+                 "date_start": sessao["date_start"],
+                 "date_end": sessao["date_end"],
+                 "is_cancelled": sessao["is_cancelled"],
+                 "location": sessao["location"],
+                 "country_name": sessao["country_name"],
+                 "country_code": sessao["country_code"],
+                 "year": sessao["year"],
+                 "gmt_offset": sessao["gmt_offset"]
+                 }
+            )
+        return sessoes_tratadas
+
+#TRAZ A LISTA DE SESSOES DE UM EVENTO DA API OPENF1 - FIM
